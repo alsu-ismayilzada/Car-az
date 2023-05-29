@@ -25,8 +25,8 @@ public class UserController {
     }
 
     @GetMapping("")
-    public List<UserDto> findAll() {
-        return userManager.findAll();
+    public List<UserDto> findAll(@RequestParam(value = "page") int page,@RequestParam(value = "count") int count) {
+        return userManager.findAll(page,count);
     }
 
     @DeleteMapping("{id}")

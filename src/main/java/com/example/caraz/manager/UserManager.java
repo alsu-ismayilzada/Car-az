@@ -1,9 +1,13 @@
 package com.example.caraz.manager;
 import com.example.caraz.dto.UserDto;
+import com.example.caraz.entity.User;
+import com.example.caraz.exception.NotFound;
 import com.example.caraz.mapper.UserMapper;
 import com.example.caraz.repository.UserRepository;
 import com.example.caraz.service.Service;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 import java.util.List;
 
@@ -22,12 +26,15 @@ public class UserManager implements Service<UserDto> {
     public UserDto getByID(Integer id) {
         return userRepository.findById(id)
                 .stream().map(userMapper::toUserDto)
-                .findFirst().get();
+                .findFirst().orElseThrow(()-> new NotFound("User not found!"));
     }
 
     @Override
-    public List<UserDto> findAll() {
-        return userRepository.findAll()
+    public List<UserDto> findAll(int page,int count) {
+
+        Page<User> all = userRepository.findAll(PageRequest.of(page,count));
+
+        return all.getContent()
                 .stream().map(userMapper::toUserDto)
                 .toList();
     }

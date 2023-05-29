@@ -1,6 +1,5 @@
 package com.example.caraz.controller;
 import com.example.caraz.dto.CarDto;
-import com.example.caraz.entity.Car;
 import com.example.caraz.manager.CarManager;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -23,8 +22,8 @@ public class CarController {
         return carManager.getByID(id);
     }
     @GetMapping("")
-    public List<CarDto> findAll(){
-        return carManager.findAll();
+    public List<CarDto> findAll(@RequestParam(value = "page") int page,@RequestParam(value = "count") int count){
+        return carManager.findAll(page,count);
     }
     @DeleteMapping("{id}")
     public void deleteByID(@PathVariable int id){

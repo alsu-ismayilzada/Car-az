@@ -1,8 +1,9 @@
 package com.example.caraz.dto;
 
 public record UserDto(
-        String fullname,
+        String name,
         int age,
         String mail
 ) {
+
 }
