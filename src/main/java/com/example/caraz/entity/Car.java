@@ -17,7 +17,6 @@ public class Car {
 
     String color;
 
-
     Integer model;
 
     int price;

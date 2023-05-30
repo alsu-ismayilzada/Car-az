@@ -8,4 +8,5 @@ public interface Service <E> {
     E getByID(Integer id);
     List<E> findAll(int page, int count);
     void deleteByID(int id);
+
 }

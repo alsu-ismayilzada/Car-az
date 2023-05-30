@@ -1,9 +1,6 @@
 package com.example.caraz.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
@@ -19,9 +16,13 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
-    String name;
+    String fullName;
 
     int age;
 
     String mail;
+
+    String password;
+    @Column(name="is_active")
+    Boolean isActive;
 }

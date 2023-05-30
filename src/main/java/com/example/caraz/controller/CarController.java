@@ -1,6 +1,7 @@
 package com.example.caraz.controller;
 import com.example.caraz.dto.CarDto;
 import com.example.caraz.manager.CarManager;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,6 +15,7 @@ public class CarController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     public void add(CarDto car){
         carManager.add(car);
     }
@@ -26,6 +28,7 @@ public class CarController {
         return carManager.findAll(page,count);
     }
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteByID(@PathVariable int id){
         carManager.deleteByID(id);
     }
