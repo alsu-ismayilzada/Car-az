@@ -4,7 +4,7 @@ import com.example.caraz.entity.Car;
 import com.example.caraz.exception.NotFound;
 import com.example.caraz.mapper.CarMapper;
 import com.example.caraz.repository.CarRepository;
-import com.example.caraz.service.Service;
+import com.example.caraz.service.CarService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class CarManager implements Service<CarDto> {
+public class CarManager implements CarService {
 
     private final CarRepository carRepository;
     private final CarMapper carMapper;

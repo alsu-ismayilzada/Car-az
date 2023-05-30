@@ -11,8 +11,8 @@ class CarMapperTest {
     @Test
     void toCarDto() {
         //given
-        Car car = new Car(1,"red",1,2000,new User(1,"Alsu",20,"alsu.com"));
-        CarDto expected = new CarDto("red",1,2000,new User(1,"Alsu",20,"alsu.com"));
+        Car car = new Car(1,"red",1,2000,new User(1,"Alsu",20,"alsu.com","alsu",true));
+        CarDto expected = new CarDto("red",1,2000,new User(1,"Alsu",20,"alsu.com","alsu",true));
         //when
         CarDto actual = carMapper.toCarDto(car);
         //then

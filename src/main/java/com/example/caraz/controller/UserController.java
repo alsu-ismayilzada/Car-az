@@ -1,7 +1,7 @@
 package com.example.caraz.controller;
 import com.example.caraz.dto.UserDto;
-import com.example.caraz.entity.User;
 import com.example.caraz.manager.UserManager;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -15,6 +15,7 @@ public class UserController {
     }
 
     @PostMapping("")
+    @PreAuthorize("hasRole('ADMIN')")
     public void add(UserDto user) {
         userManager.add(user);
     }
@@ -30,6 +31,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public void deleteByID(@PathVariable int id) {
         userManager.deleteByID(id);
     }

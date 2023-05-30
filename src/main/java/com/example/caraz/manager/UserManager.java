@@ -4,7 +4,7 @@ import com.example.caraz.entity.User;
 import com.example.caraz.exception.NotFound;
 import com.example.caraz.mapper.UserMapper;
 import com.example.caraz.repository.UserRepository;
-import com.example.caraz.service.Service;
+import com.example.caraz.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,10 +13,11 @@ import java.util.List;
 
 @Component
 @AllArgsConstructor
-public class UserManager implements Service<UserDto> {
+public class UserManager implements UserService {
 
  private final UserRepository userRepository;
  private final UserMapper userMapper;
+
     @Override
     public void add(UserDto user) {
         userRepository.save(userMapper.toUserEntity(user));
@@ -42,5 +43,11 @@ public class UserManager implements Service<UserDto> {
     @Override
     public void deleteByID(int id) {
         userRepository.deleteById(id);
+    }
+
+    @Override
+    public User getUserByMail(String mail) {
+        return userRepository.findUserByMail(mail)
+                .orElseThrow(()-> new NotFound("User not found!"));
     }
 }
