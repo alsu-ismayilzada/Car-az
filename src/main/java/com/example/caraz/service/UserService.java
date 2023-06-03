@@ -1,7 +1,7 @@
 package com.example.caraz.service;
 
 import com.example.caraz.dto.UserDto;
-import com.example.caraz.entity.User;
+import com.example.caraz.entity.MyUser;
 
 import java.util.List;
 
@@ -10,5 +10,5 @@ public interface UserService {
     UserDto getByID(Integer id);
     List<UserDto> findAll(int page, int count);
     void deleteByID(int id);
-    User getUserByMail(String mail);
+    MyUser getUserByMail(String mail);
 }

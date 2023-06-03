@@ -1,12 +1,13 @@
 package com.example.caraz.dto;
 
-import com.example.caraz.entity.User;
+
+import com.example.caraz.entity.MyUser;
 
 public record CarDto(
         String color,
         Integer model,
-        int price,
-        User user
+        Integer price,
+        MyUser user
 ) {
 
 }

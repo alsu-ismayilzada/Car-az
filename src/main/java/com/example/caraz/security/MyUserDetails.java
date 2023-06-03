@@ -1,5 +1,6 @@
 package com.example.caraz.security;
 
+import com.example.caraz.entity.Role;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,11 +13,13 @@ public class MyUserDetails implements UserDetails {
     private final String mail;
     private final String password;
     private final Boolean isActive;
+    private final Role role;
 
-    public MyUserDetails(String mail, String password, Boolean isActive) {
+    public MyUserDetails(String mail, String password, Boolean isActive,Role role) {
         this.mail = mail;
         this.password = password;
         this.isActive = isActive;
+        this.role = role;
     }
 
     @Override

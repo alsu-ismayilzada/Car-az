@@ -1,49 +1,67 @@
 package com.example.caraz.config;
 
+import com.example.caraz.security.MyUserDetailsService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class SecurityConfig {
-    @Bean
-    public PasswordEncoder passwordEncoder(){
-        return new BCryptPasswordEncoder();
-    }
-    @Bean
-    public InMemoryUserDetailsManager userDetailsManager(){
-        UserDetails userDetails1= User
-                .withUsername("alsu")
-                .password(passwordEncoder().encode("alsu123"))
-                .roles("ADMIN")
-                .build();
-        UserDetails userDetails2= User
-                .withUsername("eli")
-                .password(passwordEncoder().encode("eli123"))
-                .roles("USER")
-                .build();
-        return new InMemoryUserDetailsManager(userDetails1,userDetails2);
-    }
+
+    private final MyUserDetailsService userDetailsService;
+
+
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-        http    .csrf()
+        http
+                .csrf()
                 .disable()
+                .cors()
+                .and()
+                .userDetailsService(userDetailsService)
                 .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.POST,"/api/user/register","/api/car")
+                .permitAll()
+                .requestMatchers(HttpMethod.GET,
+                        "/api/car/**",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
 
-        http    .httpBasic();
+        http.httpBasic();
         return http.build();
-
     }
+
+    // Cross origin resource sharing
+    @Bean
+    CorsConfigurationSource corsConfigurationSource(){
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(List.of("*"));
+        configuration.setAllowedMethods(List.of("*"));
+        configuration.setAllowedHeaders(List.of("*"));
+
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
+    }
+
+
+
 }

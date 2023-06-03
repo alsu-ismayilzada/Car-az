@@ -1,13 +1,13 @@
 package com.example.caraz.repository;
 import com.example.caraz.dto.UserDto;
-import com.example.caraz.entity.User;
+import com.example.caraz.entity.MyUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<MyUser, Integer> {
 
-    Optional<User> findUserByMail(String mail);
+    Optional<MyUser> findUserByMail(String mail);
 }

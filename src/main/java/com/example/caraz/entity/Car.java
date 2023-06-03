@@ -22,6 +22,6 @@ public class Car {
     int price;
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     @ManyToOne(cascade = CascadeType.ALL)
-    User user;
+    MyUser user;
 
 }

@@ -1,7 +1,8 @@
 package com.example.caraz.mapper;
 import com.example.caraz.dto.CarDto;
 import com.example.caraz.entity.Car;
-import com.example.caraz.entity.User;
+import com.example.caraz.entity.MyUser;
+import com.example.caraz.entity.Role;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,8 +12,8 @@ class CarMapperTest {
     @Test
     void toCarDto() {
         //given
-        Car car = new Car(1,"red",1,2000,new User(1,"Alsu",20,"alsu.com","alsu",true));
-        CarDto expected = new CarDto("red",1,2000,new User(1,"Alsu",20,"alsu.com","alsu",true));
+        Car car = new Car(1,"red",1,2000,new MyUser(1,"Alsu",20,"alsu.com","alsu",true, Role.USER));
+        CarDto expected = new CarDto("red",1,2000,new MyUser(1,"Alsu",20,"alsu.com","alsu",true,Role.USER));
         //when
         CarDto actual = carMapper.toCarDto(car);
         //then
