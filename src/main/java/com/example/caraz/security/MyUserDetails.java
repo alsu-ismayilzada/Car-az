@@ -36,11 +36,7 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isAccountNonExpired() {
-<<<<<<< HEAD
-        return true;
-=======
         return isActive;
->>>>>>> origin/db-connection
     }
 
     @Override
@@ -55,10 +51,6 @@ public class MyUserDetails implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-<<<<<<< HEAD
         return isActive;
-=======
-        return true;
->>>>>>> origin/db-connection
     }
 }
