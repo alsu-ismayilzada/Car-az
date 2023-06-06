@@ -17,11 +17,14 @@ public class Car {
 
     String color;
 
-    Integer model;
+    @ManyToOne
+    @JoinColumn(name = "model_id",referencedColumnName = "id")
+    Model model;
 
-    int price;
+    Integer price;
+
+    @ManyToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
-    @ManyToOne(cascade = CascadeType.ALL)
     MyUser user;
 
 }

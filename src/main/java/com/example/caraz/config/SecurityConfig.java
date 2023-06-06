@@ -29,16 +29,20 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-                .csrf()
-                .disable()
                 .cors()
                 .and()
+                .csrf()
+                .disable()
                 .userDetailsService(userDetailsService)
                 .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.POST,"/api/user/register","/api/car")
+                .requestMatchers(HttpMethod.POST,
+                        "/api/user/**",
+                        "/api/car",
+                        "/api/user/register")
                 .permitAll()
                 .requestMatchers(HttpMethod.GET,
                         "/api/car/**",
+                        "/api/car",
                         "/swagger-ui/**",
                         "/v3/api-docs/**")
                 .permitAll()
