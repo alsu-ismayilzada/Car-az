@@ -1,5 +1,6 @@
 package com.example.caraz.service;
 
+import com.example.caraz.dto.RegisterRequest;
 import com.example.caraz.dto.UserDto;
 import com.example.caraz.entity.MyUser;
 
@@ -11,4 +12,6 @@ public interface UserService {
     List<UserDto> findAll(int page, int count);
     void deleteByID(int id);
     MyUser getUserByMail(String mail);
+
+    void register(RegisterRequest registerRequest);
 }

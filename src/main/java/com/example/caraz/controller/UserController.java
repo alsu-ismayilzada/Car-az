@@ -2,7 +2,7 @@ package com.example.caraz.controller;
 import com.example.caraz.dto.RegisterRequest;
 import com.example.caraz.dto.UserDto;
 import com.example.caraz.manager.UserManager;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import com.example.caraz.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -12,17 +12,16 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
-    private final UserManager userManager;
+    private final UserService userManager;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(UserManager.class);
 
-    public UserController(UserManager userManager) {
+    public UserController(UserService userManager) {
         this.userManager = userManager;
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
-    public void add(UserDto user) {
+    public void add(@RequestBody UserDto user) {
         userManager.add(user);
     }
 
@@ -43,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public void register(@RequestBody RegisterRequest registerRequest){
+    public void register(@RequestBody  RegisterRequest registerRequest){
         LOGGER.info("Register request accepted {}",registerRequest);
         userManager.register(registerRequest);
     }
